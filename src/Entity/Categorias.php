@@ -36,6 +36,12 @@ class Categorias
      */
     private $archivada;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Tareas",mappedBy="etiquetas")
+     * @var Tareas[]|Collection
+     */
+    private $tareas;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -73,5 +79,19 @@ class Categorias
         $this->archivada = $archivada;
     }
 
+    /**
+     * @return Collection|Tareas[]
+     */
+    public function getTareas()
+    {
+        return $this->tareas;
+    }
 
+    /**
+     * @param Collection|Tareas[] $tareas
+     */
+    public function setTareas($tareas): void
+    {
+        $this->tareas = $tareas;
+    }
 }

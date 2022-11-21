@@ -11,6 +11,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Tareas
 {
+
+    public function __construct()
+    {
+        $this->etiquetas = new ArrayCollection();
+    }
+
     /**
      * @var string|null
      * @ORM\Column(type="string")
@@ -49,8 +55,8 @@ class Tareas
     private $detalle;
 
     /**
-     * @ORM\OneToMany(targetEntity="Incidencia")
-     * @var Incidencia[]|Collection
+     * @ORM\OneToMany(targetEntity="Categorias",mappedBy="tareas")
+     * @var Categorias[]|Collection
      */
     private $etiquetas;
 
@@ -121,7 +127,7 @@ class Tareas
     }
 
     /**
-     * @return Collection|Incidencia[]
+     * @return Collection|Categorias[]
      */
     public function getEtiquetas()
     {
@@ -129,7 +135,7 @@ class Tareas
     }
 
     /**
-     * @param Collection|Incidencia[] $etiquetas
+     * @param Collection|Categorias[] $etiquetas
      */
     public function setEtiquetas($etiquetas): void
     {

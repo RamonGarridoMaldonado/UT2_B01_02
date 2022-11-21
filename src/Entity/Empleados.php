@@ -43,11 +43,18 @@ class Empleados
     private $estaActivo;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Empleados")
+     * @ORM\ManyToOne(targetEntity="Empleados",inversedBy="empleados")
      * @ORM\JoinColumn(nullable=false)
      * @var Empleados
      */
     private $sustituto;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Prioridades",mappedBy="responsable")
+     * @var Persona
+     */
+    private $empleados;
+
 
     public function getNombre(): ?string
     {
@@ -105,19 +112,25 @@ class Empleados
         return $this;
     }
 
-    /**
-     * @return Empleados
-     */
     public function getSustituto(): Empleados
     {
         return $this->sustituto;
     }
 
-    /**
-     * @param Empleados $sustituto
-     */
     public function setSustituto(Empleados $sustituto): void
     {
         $this->sustituto = $sustituto;
     }
+
+    public function getEmpleados(): Persona
+    {
+        return $this->empleados;
+    }
+
+    public function setEmpleados(Persona $empleados): void
+    {
+        $this->empleados = $empleados;
+    }
+
+
 }

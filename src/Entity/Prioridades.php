@@ -27,7 +27,7 @@ class Prioridades
     private $descripcion;
 
     /**
-     * @ORM\OneToOne(targetEntity="Persona")
+     * @ORM\OneToOne(targetEntity="Empleados",mappedBy="empleados")
      * @ORM\JoinColumn(nullable=false)
      * @var Persona
      */
@@ -75,4 +75,6 @@ class Prioridades
     {
         $this->responsable = $responsable;
     }
+
+
 }
