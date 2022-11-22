@@ -11,6 +11,13 @@ class Prioridades
 {
     /**
      * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer",unique=true)
+     * @var int|null
+     */
+    private $id;
+
+    /**
      * @ORM\Column(type="integer",unique=true)
      * @var int|null
      */
@@ -76,5 +83,19 @@ class Prioridades
         $this->responsable = $responsable;
     }
 
+    /**
+     * @return int|null
+     */
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 
+    /**
+     * @param int|null $id
+     */
+    public function setId(?int $id): void
+    {
+        $this->id = $id;
+    }
 }

@@ -37,10 +37,17 @@ class Categorias
     private $archivada;
 
     /**
-     * @ORM\OneToMany(targetEntity="Tareas",mappedBy="etiquetas")
+     * @ORM\ManyToMany(targetEntity="Tareas",mappedBy="categorias")
      * @var Tareas[]|Collection
      */
     private $tareas;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Empleados")
+     * @ORM\JoinColumn(nullable=false, unique=true)
+     * @var Empleados | null
+     */
+    private $responsable;
 
     public function getId(): ?int
     {
@@ -94,4 +101,22 @@ class Categorias
     {
         $this->tareas = $tareas;
     }
+
+    /**
+     * @return Empleados|null
+     */
+    public function getResponsable(): ?Empleados
+    {
+        return $this->responsable;
+    }
+
+    /**
+     * @param Empleados|null $responsable
+     */
+    public function setResponsable(?Empleados $responsable): void
+    {
+        $this->responsable = $responsable;
+    }
+
+
 }

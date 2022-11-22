@@ -18,26 +18,34 @@ class Tareas
     }
 
     /**
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer",unique=true)
+     * @var int|null
+     */
+    private $id;
+
+    /**
      * @var string|null
      * @ORM\Column(type="string")
      */
     private $titulo;
 
     /**
-     * @var string
-     * @ORM\Column(type="string")
+     * @ORM\ManyToOne(targetEntity="Empleados")
+     * @ORM\JoinColumn(nullable=false, unique=true)
+     * @var Empleados | null
      */
     private $empleado;
 
     /**
-     * @var integer
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="Prioridades")
+     * @var Prioridades
      */
     private $prioridad;
 
     /**
      * @var integer
-     * @ORM\Id()
      * @ORM\Column(type="string",unique=true)
      */
     private $codigo;
@@ -55,10 +63,10 @@ class Tareas
     private $detalle;
 
     /**
-     * @ORM\OneToMany(targetEntity="Categorias",mappedBy="tareas")
+     * @ORM\ManyToMany(targetEntity="Categorias",inversedBy="tareas")
      * @var Categorias[]|Collection
      */
-    private $etiquetas;
+    private $categorias;
 
     public function getTitulo(): ?string
     {
@@ -71,16 +79,22 @@ class Tareas
         return $this;
     }
 
-    public function getEmpleado(): ?string
+    /**
+     * @return Empleados|null
+     */
+    public function getEmpleado(): ?Empleados
     {
         return $this->empleado;
     }
 
-    public function setEmpleado(string $empleado): Tareas
+    /**
+     * @param Empleados|null $empleado
+     */
+    public function setEmpleado(?Empleados $empleado): void
     {
         $this->empleado = $empleado;
-        return $this;
     }
+
 
     public function getPrioridad(): ?int
     {
@@ -142,5 +156,19 @@ class Tareas
         $this->etiquetas = $etiquetas;
     }
 
+    /**
+     * @return int|null
+     */
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 
+    /**
+     * @param int|null $id
+     */
+    public function setId(?int $id): void
+    {
+        $this->id = $id;
+    }
 }
